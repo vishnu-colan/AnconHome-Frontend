@@ -374,7 +374,9 @@ class HaSidebar extends SubscribeMixin(LitElement) {
         ? html`<mwc-button outlined @click=${this._closeEditMode}>
             ${this.hass.localize("ui.sidebar.done")}
           </mwc-button>`
-        : html`<div class="title">Home Assistant</div>`}
+        : html`<div class="title">
+            <img src="/static/ancon/img/Ancon.png" alt="ancon-home-logo" />
+          </div>`}
     </div>`;
   }
 
@@ -873,11 +875,17 @@ class HaSidebar extends SubscribeMixin(LitElement) {
           color: var(--sidebar-icon-color);
         }
         .title {
-          margin-left: 19px;
-          margin-inline-start: 19px;
+          // margin-left: 19px;
+          // margin-inline-start: 19px;
           margin-inline-end: initial;
           width: 100%;
-          display: none;
+          margin-top: 0.7rem;
+          // display: none;
+        }
+        .title img {
+          height: 30px;
+          width: 180px;
+          object-fit: cover;
         }
         :host([narrow]) .title {
           margin: 0;
