@@ -19,7 +19,14 @@ class HaTip extends LitElement {
       <span class="prefix"
         >${this.hass.localize("ui.panel.config.tips.tip")}</span
       >
-      <span class="text"><slot></slot></span>
+      <span class="text"
+        ><a
+          href="https://www.anconsystem.com/"
+          target="_blank"
+          class="ancon-url"
+          >www.anconsystem.com</a
+        ></span
+      >
     `;
   }
 
@@ -39,6 +46,10 @@ class HaTip extends LitElement {
 
     .prefix {
       font-weight: 500;
+    }
+    .ancon-url {
+      color: #039be5;
+      text-decoration: none;
     }
   `;
 }
