@@ -1,12 +1,5 @@
 import "@material/mwc-list/mwc-list";
-import {
-  mdiBug,
-  mdiFileDocument,
-  mdiHandsPray,
-  mdiHelp,
-  mdiNewspaperVariant,
-  mdiTshirtCrew,
-} from "@mdi/js";
+import { mdiFileDocument, mdiHelp } from "@mdi/js";
 import type { CSSResultGroup, TemplateResult } from "lit";
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators";
@@ -19,54 +12,54 @@ import { fetchHassioHassOsInfo } from "../../../data/hassio/host";
 import type { HassioInfo } from "../../../data/hassio/supervisor";
 import { fetchHassioInfo } from "../../../data/hassio/supervisor";
 import "../../../layouts/hass-subpage";
-import { mdiHomeAssistant } from "../../../resources/home-assistant-logo-svg";
 import { haStyle } from "../../../resources/styles";
 import type { HomeAssistant, Route } from "../../../types";
-import { documentationUrl } from "../../../util/documentation-url";
 
 const JS_TYPE = __BUILD__;
 const JS_VERSION = __VERSION__;
 
 const PAGES = [
-  {
-    name: "change_log",
-    path: "/latest-release-notes/",
-    iconPath: mdiNewspaperVariant,
-    iconColor: "#4A5963",
-  },
-  {
-    name: "thanks",
-    path: "/developers/credits/",
-    iconPath: mdiHandsPray,
-    iconColor: "#3B808E",
-  },
-  {
-    name: "merch",
-    path: "/merch",
-    iconPath: mdiTshirtCrew,
-    iconColor: "#C65326",
-  },
-  {
-    name: "feature",
-    path: "/feature-requests",
-    iconPath: mdiHomeAssistant,
-    iconColor: "#0D47A1",
-  },
-  {
-    name: "bug",
-    path: "/issues",
-    iconPath: mdiBug,
-    iconColor: "#F1C447",
-  },
+  // {
+  //   name: "change_log",
+  //   path: "/latest-release-notes/",
+  //   iconPath: mdiNewspaperVariant,
+  //   iconColor: "#4A5963",
+  // },
+  // {
+  //   name: "thanks",
+  //   path: "/developers/credits/",
+  //   iconPath: mdiHandsPray,
+  //   iconColor: "#3B808E",
+  // },
+  // {
+  //   name: "merch",
+  //   path: "/merch",
+  //   iconPath: mdiTshirtCrew,
+  //   iconColor: "#C65326",
+  // },
+  // {
+  //   name: "feature",
+  //   path: "/feature-requests",
+  //   iconPath: mdiHomeAssistant,
+  //   iconColor: "#0D47A1",
+  // },
+  // {
+  //   name: "bug",
+  //   path: "/issues",
+  //   iconPath: mdiBug,
+  //   iconColor: "#F1C447",
+  // },
   {
     name: "help",
-    path: "/community",
+    // path: "/community",
+    path: "https://www.anconsystem.com/",
     iconPath: mdiHelp,
     iconColor: "#B1345C",
   },
   {
     name: "license",
-    path: "/developers/license/",
+    // path: "/developers/license/",
+    path: "https://www.anconsystem.com/",
     iconPath: mdiFileDocument,
     iconColor: "#518C43",
   },
@@ -98,6 +91,8 @@ class HaConfigInfo extends LitElement {
     const customUiList: Array<{ name: string; url: string; version: string }> =
       (window as any).CUSTOM_UI_LIST || [];
 
+    const anconUrl = "https://www.anconsystem.com/";
+
     return html`
       <hass-subpage
         .hass=${this.hass}
@@ -107,19 +102,13 @@ class HaConfigInfo extends LitElement {
       >
         <div class="content">
           <ha-card outlined class="header">
-            <a
-              href=${documentationUrl(this.hass, "")}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ha-logo-svg
-                title=${this.hass.localize(
-                  "ui.panel.config.info.home_assistant_logo"
-                )}
-              >
-              </ha-logo-svg>
+            <a href=${anconUrl} target="_blank" rel="noreferrer">
+              <img
+                class="brand-image"
+                src="/static/ancon/img/Ancon.png"
+                alt="ancon-logo"
+              />
             </a>
-            <p>Home Assistant</p>
             <ul class="versions">
               <li>
                 <span class="version-label">Core</span>
@@ -156,14 +145,21 @@ class HaConfigInfo extends LitElement {
             </ul>
           </ha-card>
           <ha-card outlined class="ohf">
-            <div>Proud part of</div>
-            <a
-              href="https://www.openhomefoundation.org"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src="/static/icons/ohf.svg" alt="Open Home Foundation" />
-            </a>
+            <div class="brand-logo">
+              <a href=${anconUrl} target="_blank">
+                <img src="/static/ancon/img/Ancon.png" alt="ancon-logo" />
+              </a>
+            </div>
+            <div class="link-to-homefoundation">
+              <div>Proud part of</div>
+              <a
+                href="https://www.openhomefoundation.org"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="/static/icons/ohf.svg" alt="Open Home Foundation" />
+              </a>
+            </div>
           </ha-card>
 
           <ha-card outlined class="pages">
@@ -173,7 +169,7 @@ class HaConfigInfo extends LitElement {
                   <ha-clickable-list-item
                     graphic="avatar"
                     openNewTab
-                    href=${documentationUrl(this.hass, page.path)}
+                    href=${page.path}
                   >
                     <div
                       slot="graphic"
@@ -247,7 +243,11 @@ class HaConfigInfo extends LitElement {
           max-width: 1040px;
           margin: 0 auto;
         }
-
+        .content .brand-image {
+          height: 30px;
+          width: 180px;
+          object-fit: cover;
+        }
         ha-logo-svg {
           height: 56px;
           width: 56px;
@@ -277,11 +277,20 @@ class HaConfigInfo extends LitElement {
         }
 
         .ohf {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           text-align: center;
           padding-bottom: 0;
         }
 
-        .ohf img {
+        .ohf .brand-logo img {
+          width: 180px;
+          height: 30px;
+          object-fit: cover;
+        }
+
+        .ohf .link-to-homefoundation img {
           width: 100%;
           max-width: 250px;
         }
