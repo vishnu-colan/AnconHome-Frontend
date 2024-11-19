@@ -249,15 +249,6 @@ export class HaAuthFlow extends LitElement {
                       @change=${this._storeTokenChanged}
                     ></ha-checkbox>
                   </ha-formfield>
-                  <a
-                    class="forgot-password"
-                    href="https://www.home-assistant.io/docs/locked_out/#forgot-password"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    >${this.localize(
-                      "ui.panel.page-authorize.forgot_password"
-                    )}</a
-                  >
                 </div>
               `
             : ""}
