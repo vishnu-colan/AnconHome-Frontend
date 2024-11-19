@@ -42,7 +42,7 @@
   <body id="particles">
     <div class="content">
       <div class="header">
-        <img src="/static/icons/favicon-192x192.png" alt="Home Assistant" />
+        <img src="/static/ancon/img/Ancon.png" alt="Ancon System" />
       </div>
       <ha-onboarding></ha-onboarding>
     </div>
